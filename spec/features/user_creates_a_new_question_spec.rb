@@ -11,4 +11,50 @@ RSpec.feature "creating a new question" do
     expect(page).to have_content("Question has been created")
     expect(current_path).to eq(questions_path)
   end
+
+  scenario "user forgets question title" do
+    visit "/"
+    click_link "New Question"
+    expect(page).to have_content("Post a new question")
+    fill_in "Title", with: ''
+    fill_in "Body", with: 'I have intentionally forgotten the title of the question'
+    click_button "Create Question"
+    expect(page).to have_content("Question has not been created!")
+    expect(page.current_path).to eq(new_question_path)
+  end
+
+  scenario "user forgets question body" do
+    visit "/"
+    click_link "New Question"
+    expect(page).to have_content("Post a new question")
+    fill_in "Title", with: 'Bodyless question'
+    fill_in "Body", with: ''
+    click_button "Create Question"
+    expect(page).to have_content("Question has not been created!")
+    expect(page.current_path).to eq(new_question_path)
+  end
+
+  scenario "Title is less than 4 characters" do
+    visit "/"
+    click_link "New Question"
+    expect(page).to have_content("Post a new question")
+    fill_in "Title", with: '123'
+    fill_in "Body", with: 'Hey. My title only has three characters. Is this allowed?'
+    click_button "Create Question"
+    expect(page).to have_content("Question has not been created!")
+    expect(page.current_path).to eq(new_question_path)
+  end
+
+  scenario "Body is less than 10 characters" do
+    visit "/"
+    click_link "New Question"
+    expect(page).to have_content("Post a new question")
+    fill_in "Title", with: 'Reasonable Title for A Question'
+    fill_in "Body", with: '123456789'
+    click_button "Create Question"
+    expect(page).to have_content("Question has not been created!")
+    expect(page.current_path).to eq(new_question_path)
+  end
+
+
 end
