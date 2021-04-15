@@ -1,11 +1,15 @@
-<h1>Eazy Q&A</h1>
+<div class="container">
+  <h1>Eazy Q&A</h1>
 
-<%= link_to 'New Question', new_question_path %>
+  <%= link_to 'New Question', new_question_path %>
+  <div class="pt-5">
+    <% if @questions.empty? %>
+      <h3>No questions to show</h3>
+    <% else%>
+      <% @questions.each do |question| %>
+        <div><%= link_to question.title, question_path(question) %></div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 
-<% if @questions.empty? %>
-  <h3>No questions to show</h3>
-<% else%>
-  <% @questions.each do |question| %>
-    <div><%= link_to question.title, question_path(question) %></div>
-  <% end %>
-<% end %>
