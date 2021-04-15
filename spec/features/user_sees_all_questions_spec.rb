@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Viewing all questions" do
   before do
-    @question_one = Question.new(title: "this is the first q", body: "this is the message body")
+    @question_one = Question.new(title: "Question Title", body: "this is the message body")
   end
 
   scenario 'A user navigates to homepage to see all the existing questions' do
