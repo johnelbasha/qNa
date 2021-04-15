@@ -2,8 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Seeing a specific question" do
   before do
-    @question = Question.new(title: "Major Question", body: "this is the message body")
-    @question.save
+    @question = Question.create(title: "Major Question", body: "this is the message body")
   end
 
   scenario "user clicks on link from index page" do
