@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "creating a new question" do
-  scenario "user provies all necessary inputs" do
+  scenario "user provides all necessary inputs" do
     visit "/"
     click_link "New Question"
     expect(page).to have_content("Post a new question")
